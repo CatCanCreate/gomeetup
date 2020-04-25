@@ -30,7 +30,7 @@ func gracefulShutdown(server *http.Server, quit <-chan os.Signal, done chan<- bo
 
 func main() {
 	cfg := config.Server{}
-	err := cleanenv.ReadConfig("config.yml", &cfg)
+	err := cleanenv.ReadConfig("./configs/config.yml", &cfg)
 	if err != nil {
 		log.Fatalln(err)
 	}
@@ -56,7 +56,7 @@ func main() {
 
 	go gracefulShutdown(server, quit, done)
 
-	log.Println("server start on http://localhost:8080")
+	log.Println("server start on http://" + addr)
 
 	if err := server.ListenAndServe(); err != nil && err != http.ErrServerClosed {
 		log.Fatalf("Could not listen on %s: %v\n", addr, err)
