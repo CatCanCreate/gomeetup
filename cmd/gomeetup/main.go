@@ -22,8 +22,10 @@ func main() {
 
 	r.Get("/hello", h.Hello)
 
+	addr := cfg.Host + ":" + cfg.Port
+
 	log.Println("server start on http://localhost:8080")
-	err = http.ListenAndServe(":8080", r)
+	err = http.ListenAndServe(addr, r)
 	log.Fatalln(err)
 
 }
