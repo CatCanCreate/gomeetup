@@ -7,17 +7,17 @@ import (
 )
 
 type Handler struct {
-	JokeClient api.Client
+	jokeClient api.Client
 }
 
 func NewHandler(apiClient api.Client) *Handler {
 	return &Handler{
-		JokeClient: apiClient,
+		jokeClient: apiClient,
 	}
 }
 
 func (h *Handler) Hello(w http.ResponseWriter, r *http.Request) {
-	joke, err := h.JokeClient.GetJoke()
+	joke, err := h.jokeClient.GetJoke()
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
