@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/CatCanCreate/gomeetup/internal/api/jokes"
 	"github.com/CatCanCreate/gomeetup/internal/config"
 	"github.com/CatCanCreate/gomeetup/internal/handler"
 	"github.com/go-chi/chi"
@@ -16,7 +17,9 @@ func main() {
 		log.Fatalln(err)
 	}
 
-	h := handler.NewHandler()
+	apiClient := jokes.NewJokeClientAPI(cfg.JokeURL)
+
+	h := handler.NewHandler(apiClient)
 
 	r := chi.NewRouter()
 
